@@ -24,6 +24,12 @@ RUN yum --enablerepo=remi,remi-php70 install -y php-opcache php-pecl-apcu php-cl
     php-pear php-pdo php-mysqlnd php-pecl-redis php-pecl-memcache \
     php-pecl-memcached php-gd php-mbstring php-mcrypt php-xml php-imap
 
+# Add some php directives
+RUN echo "request_terminate_timeout = 300" >> /etc/php-fpm.d/www.conf
+RUN echo "php_admin_value[memory_limit] = 256M" >> /etc/php-fpm.d/www.conf
+RUN echo "php_admin_value[upload_max_filesize] = 100M" >> /etc/php-fpm.d/www.conf
+RUN echo "php_admin_value[post_max_size] = 8M" >> /etc/php-fpm.d/www.conf
+
 # Nginx setup
 RUN mkdir -p /srv/www/mailwizz/public_html
 RUN mkdir /srv/www/mailwizz/logs
@@ -35,6 +41,7 @@ ADD conf/nginx.conf /etc/nginx/
 ADD conf/nginx-mailwizz.conf /etc/nginx/sites-available/mailwizz
 RUN ln -s /etc/nginx/sites-available/mailwizz /etc/nginx/sites-enabled/mailwizz
 RUN echo "<?php phpinfo();?>" >> /srv/www/mailwizz/public_html/index.php
+RUN mkdir -p /srv/www/mailwizz/public_html
 VOLUME /srv/www/mailwizz/public_html
 EXPOSE 80 443
 
@@ -42,7 +49,7 @@ EXPOSE 80 443
 ADD repos/mariadb.repo /etc/yum.repos.d/mariadb.repo
 ADD conf/mariadb.cnf /etc/my.cnf.d/server.cnf
 RUN yum install -y MariaDB-server
-VOLUME /var/lib/docker/mysql
+VOLUME /var/lib/mysql
 EXPOSE 3306
 
 # Scripts
