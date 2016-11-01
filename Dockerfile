@@ -3,13 +3,15 @@
 FROM centos:7
 MAINTAINER Serban Cristian "support@mailwizz.com"
 
-# install common packages
+# update packages
 RUN yum update -y
-RUN yum install -y nmap hostname nano curl unzip cronie pwgen
 
 # EPEL and PHP 7
 RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
 RUN rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+
+# install common packages
+RUN yum install -y nmap hostname nano curl unzip cronie pwgen
 
 # Supervisor
 RUN yum install -y supervisor
