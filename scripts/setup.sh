@@ -8,7 +8,7 @@ while [[ -z "${MAILWIZZ_LICENSE_KEY// }" ]]; do
 done
 
 while [[ -z "${MAILWIZZ_VERSION// }" ]]; do
-    read -p "[ -> ] Please enter the MailWizz version you want to use(i.e: 1.3.7.2): " MAILWIZZ_VERSION
+    read -p "[ -> ] Please enter the MailWizz version you want to use(i.e: 1.3.7.3): " MAILWIZZ_VERSION
 done
 
 MAILWIZZ_FILE_NAME="mailwizz-$MAILWIZZ_VERSION"
@@ -96,11 +96,17 @@ INSERT INTO option SET category = "system.common", \`key\` = "version", value = 
 EOF
 
 echo "Creating main config... "
+# generate random word
+RNDSTR="$(pwgen -A -0 4 1)"
+# uppercase first char
+EMAILS_CUSTOM_HEADER_PREFIX=${RNDSTR^}
+# replace
 cp $HTML/apps/common/data/config/main-custom.php $HTML/apps/common/config/main-custom.php
 sed -i "s/{DB_CONNECTION_STRING}/mysql:host=localhost;dbname=${MAILWIZZ_DB_NAME}/g" $HTML/apps/common/config/main-custom.php
 sed -i "s/{DB_USER}/${MAILWIZZ_DB_USER}/g" $HTML/apps/common/config/main-custom.php
 sed -i "s/{DB_PASS}/${MAILWIZZ_DB_PASS}/g" $HTML/apps/common/config/main-custom.php
 sed -i "s/{DB_PREFIX}//g" $HTML/apps/common/config/main-custom.php
+sed -i "s/{EMAILS_CUSTOM_HEADER_PREFIX}/X-${EMAILS_CUSTOM_HEADER_PREFIX}/g" $HTML/apps/common/config/main-custom.php
 
 echo "Adding the cron jobs... "
 echo "* * * * * /usr/bin/php -q $HTML/apps/console/console.php send-campaigns >/dev/null 2>&1 &" >> mwcron

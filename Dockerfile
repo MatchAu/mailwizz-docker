@@ -5,7 +5,7 @@ MAINTAINER Serban Cristian "support@mailwizz.com"
 
 # install common packages
 RUN yum update -y
-RUN yum install -y nmap hostname nano curl unzip cronie
+RUN yum install -y nmap hostname nano curl unzip cronie pwgen
 
 # EPEL and PHP 7
 RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
