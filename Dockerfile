@@ -24,7 +24,7 @@ ADD repos/nginx.repo /etc/yum.repos.d/
 RUN yum --enablerepo=remi,remi-php70 install -y nginx php-fpm php-common
 RUN yum --enablerepo=remi,remi-php70 install -y php-opcache php-pecl-apcu php-cli \
     php-pear php-pdo php-mysqlnd php-pecl-redis php-pecl-memcache \
-    php-pecl-memcached php-gd php-mbstring php-mcrypt php-xml php-imap
+    php-pecl-memcached php-gd php-mbstring php-mcrypt php-xml php-imap php-zip
 
 # Add some php directives
 RUN echo "request_terminate_timeout = 300" >> /etc/php-fpm.d/www.conf
