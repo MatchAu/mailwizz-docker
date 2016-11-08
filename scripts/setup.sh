@@ -8,7 +8,7 @@ while [[ -z "${MAILWIZZ_LICENSE_KEY// }" ]]; do
 done
 
 while [[ -z "${MAILWIZZ_VERSION// }" ]]; do
-    read -p "[ -> ] Please enter the MailWizz version you want to use(i.e: 1.3.7.3): " MAILWIZZ_VERSION
+    read -p "[ -> ] Please enter the MailWizz version you want to use(i.e: 1.3.7.7): " MAILWIZZ_VERSION
 done
 
 MAILWIZZ_FILE_NAME="mailwizz-$MAILWIZZ_VERSION"
@@ -114,7 +114,8 @@ echo "*/2 * * * * /usr/bin/php -q $HTML/apps/console/console.php send-transactio
 echo "*/10 * * * * /usr/bin/php -q $HTML/apps/console/console.php bounce-handler >/dev/null 2>&1 &" >> mwcron
 echo "*/20 * * * * /usr/bin/php -q $HTML/apps/console/console.php feedback-loop-handler >/dev/null 2>&1 &" >> mwcron
 echo "*/3 * * * * /usr/bin/php -q $HTML/apps/console/console.php process-delivery-and-bounce-log >/dev/null 2>&1 &" >> mwcron
-echo "* * * * * /usr/bin/php -q $HTML/apps/console/console.php daily >/dev/null 2>&1 &" >> mwcron
+echo "0 * * * * /usr/bin/php -q $HTML/apps/console/console.php hourly >/dev/null 2>&1 &" >> mwcron
+echo "0 0 * * * /usr/bin/php -q $HTML/apps/console/console.php daily >/dev/null 2>&1 &" >> mwcron
 crontab mwcron
 rm mwcron
 
