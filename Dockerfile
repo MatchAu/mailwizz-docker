@@ -7,7 +7,7 @@ MAINTAINER Serban Cristian "support@mailwizz.com"
 RUN yum update -y
 
 # EPEL and PHP 7
-RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
+RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm
 RUN rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 
 # install common packages
