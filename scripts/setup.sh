@@ -82,8 +82,8 @@ while [[ -z "${CUSTOMER_LAST_NAME// }" ]]; do
 done
 
 mysql -h localhost -u$MAILWIZZ_DB_USER -p$MAILWIZZ_DB_PASS $MAILWIZZ_DB_NAME <<EOF
-INSERT INTO user VALUES (NULL,'zy141276wz5ef',NULL,NULL,'$CUSTOMER_FIRST_NAME','$CUSTOMER_LAST_NAME','$CUSTOMER_EMAIL','\$P\$GCfF1NQ/w6a9I0sh/cUIIf/lkc/cOd0','UTC',NULL,'no','active',NOW(),NOW());
-INSERT INTO customer VALUES (NULL,'mj61610g5ea23',NULL,NULL,'$CUSTOMER_FIRST_NAME','$CUSTOMER_LAST_NAME','$CUSTOMER_EMAIL','\$P\$GCfF1NQ/w6a9I0sh/cUIIf/lkc/cOd0','UTC',NULL,0,'yes','02022e98ba5e8c3be026acc51955950483e9fa23',NULL,NULL,'active',NOW(),NOW());
+INSERT INTO user(`user_id`, `user_uid`, `group_id`, `language_id`, `first_name`, `last_name`, `email`, `password`, `timezone`, `avatar`, `removable`, `status`, `date_added`, `last_updated`) VALUES (NULL,'zy141276wz5ef',NULL,NULL,'$CUSTOMER_FIRST_NAME','$CUSTOMER_LAST_NAME','$CUSTOMER_EMAIL','\$P\$GCfF1NQ/w6a9I0sh/cUIIf/lkc/cOd0','UTC',NULL,'no','active',NOW(),NOW());
+INSERT INTO customer(`customer_id`, `customer_uid`, `group_id`, `language_id`, `first_name`, `last_name`, `email`, `password`, `timezone`, `avatar`, `removable`, `confirmation_key`, `oauth_uid`, `oauth_provider`, `status`, `date_added`, `last_updated`) VALUES (NULL,'mj61610g5ea23',NULL,NULL,'$CUSTOMER_FIRST_NAME','$CUSTOMER_LAST_NAME','$CUSTOMER_EMAIL','\$P\$GCfF1NQ/w6a9I0sh/cUIIf/lkc/cOd0','UTC',NULL,'yes','02022e98ba5e8c3be026acc51955950483e9fa23',NULL,NULL,'active',NOW(),NOW());
 
 INSERT INTO option SET category = "system.license", \`key\` = "email", value = "$CUSTOMER_EMAIL", is_serialized = 0, date_added = NOW(), last_updated  = NOW();
 INSERT INTO option SET category = "system.license", \`key\` = "first_name", value = "$CUSTOMER_FIRST_NAME", is_serialized = 0, date_added = NOW(), last_updated  = NOW();
