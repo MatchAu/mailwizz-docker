@@ -1,3 +1,5 @@
 .DS_Store
 mailwizz
 docker-compose.yml
+caddy/Caddyfile
+nginx/nginx.conf
