@@ -11,6 +11,9 @@ server {
     # http://serverfault.com/questions/269420/disable-caching-when-serving-static-files-with-nginx-for-development
     sendfile  off;
 
+    access_log /var/www/mailwizz/logs/nginx.access.log;
+    error_log /var/www/mailwizz/logs/nginx.error.log;
+
     root /var/www/mailwizz/html;
     index index.php;
 
