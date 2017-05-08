@@ -1,0 +1,43 @@
+[DOMAIN]:80 {
+    redir https://[DOMAIN]{uri}
+}
+
+[DOMAIN]:443 {
+     root /var/www/mailwizz/html
+     gzip
+     tls [EMAIL]
+
+     status 403 /forbidden
+
+     # deny access to specific files in the root folder
+     rewrite {
+         if {path} match /(LICENSE.txt|composer.lock|composer.json|htaccess.txt|\.htaccess)
+         to /forbidden
+     }
+
+     # backend rules
+     rewrite /backend/ {
+     	to {path} {path}/  /backend/index.php
+     }
+
+     # customer rules
+     rewrite /customer/ {
+     	to {path} {path}/  /customer/index.php
+     }
+
+     # api rules
+     rewrite /api/ {
+     	to {path} {path}/  /api/index.php
+     }
+
+     # global rewrite should come last.
+     rewrite / {
+     	to {path} {path}/  /index.php
+     }
+
+     fastcgi / mailwizz-php:9000 {
+     	ext 	.php
+     	split	.php
+     	index	index.php
+     }
+}

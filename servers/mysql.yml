@@ -1,0 +1,10 @@
+mailwizz-mysql:
+  image: mysql:5.7
+  container_name: mailwizz-mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD=[MYSQL_ROOT_PASSWORD]
+    - MYSQL_DATABASE=[MYSQL_DATABASE]
+    - MYSQL_USER=[MYSQL_USER]
+    - MYSQL_PASSWORD=[MYSQL_PASSWORD]
+    - MYSQL_PORT=3306
+    - MYSQL_HOST=localhost

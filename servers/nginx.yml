@@ -1,0 +1,10 @@
+mailwizz-webserver:
+  image: phpdockerio/nginx:latest
+  container_name: mailwizz-webserver
+  volumes:
+      - ./mailwizz:/var/www/mailwizz
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+  ports:
+   - "80:80"
+  links:
+   - mailwizz-php

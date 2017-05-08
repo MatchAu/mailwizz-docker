@@ -1,0 +1,14 @@
+mailwizz-webserver:
+  build: .
+  dockerfile: caddy/Dockerfile
+  container_name: mailwizz-webserver
+  volumes:
+      - ./mailwizz:/var/www/mailwizz
+      - ./caddy/Caddyfile:/etc/Caddyfile
+      - ./caddy/certs:/root/.caddy
+  ports:
+   - "80:80"
+   - "443:443"
+  links:
+   - mailwizz-mysql
+   - mailwizz-php

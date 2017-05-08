@@ -1,0 +1,1 @@
+FROM zzrot/alpine-caddy:latest

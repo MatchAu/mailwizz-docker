@@ -1,0 +1,16 @@
+mailwizz-php:
+  build: .
+  dockerfile: php-fpm/Dockerfile
+  container_name: mailwizz-php
+  volumes:
+    - ./mailwizz:/var/www/mailwizz
+  links:
+    - mailwizz-mysql
+  environment:
+    PHP_php5enmod: 'bcmath gd gmp intl mbstring mysqli pcntl pdo_mysql redis zip sockets'
+    PHPFPM__pm: dynamic
+    PHPFPM__pm.max_children: 70
+    PHPFPM__pm.start_servers: 20
+    PHPFPM__pm.min_spare_servers: 20
+    PHPFPM__pm.max_spare_servers: 35
+    PHPFPM__pm.max_requests: 500

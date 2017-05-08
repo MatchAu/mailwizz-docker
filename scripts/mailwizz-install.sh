@@ -7,16 +7,12 @@ while [[ -z "${MAILWIZZ_LICENSE_KEY// }" ]]; do
     read -p "[ -> ] Please enter your mailwizz purchase code (license key): " MAILWIZZ_LICENSE_KEY
 done
 
-while [[ -z "${MAILWIZZ_VERSION// }" ]]; do
-    read -p "[ -> ] Please enter the MailWizz version you want to use(i.e: 1.3.7.7): " MAILWIZZ_VERSION
-done
-
-MAILWIZZ_FILE_NAME="mailwizz-$MAILWIZZ_VERSION"
+MAILWIZZ_FILE_NAME="mailwizz-latest"
 MAILWIZ_ZIP_NAME="$MAILWIZZ_FILE_NAME.zip"
-HTML="/srv/www/mailwizz/public_html"
+HTML="/var/www/mailwizz/"
 
-echo "Fetching MailWizz version $MAILWIZZ_VERSION using the license key $MAILWIZZ_LICENSE_KEY: "
-curl -o "mailwizz-$MAILWIZZ_VERSION.zip" -H "X-LICENSEKEY: $MAILWIZZ_LICENSE_KEY" "https://www.mailwizz.com/api/download/version/$MAILWIZZ_VERSION" >/dev/null
+echo "Fetching MailWizz using the license key $MAILWIZZ_LICENSE_KEY: "
+curl -o "mailwizz-latest.zip" -H "X-LICENSEKEY: $MAILWIZZ_LICENSE_KEY" "https://www.mailwizz.com/api/download/version/latest" >/dev/null
 
 if [ ! -f $MAILWIZ_ZIP_NAME ]; then
     echo "Please supply valid version and purchase code!"

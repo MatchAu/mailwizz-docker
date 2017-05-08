@@ -1,0 +1,13 @@
+amala-phpmyadmin:
+  image: phpmyadmin/phpmyadmin
+  container_name: mailwizz-phpmyadmin
+  environment:
+    - PMA_ARBITRARY=1
+    - PMA_HOST=mailwizz-mysql
+  restart: always
+  ports:
+    - 8181:80
+  volumes:
+    - /sessions
+  links:
+    - mailwizz-mysql
