@@ -64,6 +64,9 @@ sed -i "s/{DB_PASS}/${MAILWIZZ_MYSQL_ENV_MYSQL_PASSWORD}/g" /var/www/mailwizz/ht
 sed -i "s/{DB_PREFIX}//g" /var/www/mailwizz/html/apps/common/config/main-custom.php
 sed -i "s/{EMAILS_CUSTOM_HEADER_PREFIX}/X-${EMAILS_CUSTOM_HEADER_PREFIX}/g" /var/www/mailwizz/html/apps/common/config/main-custom.php
 
+# make sure the cron is started and starts at boot time too
+/etc/init.d/cron start && update-rc.d cron defaults
+
 echo "Adding the cron jobs... "
 echo "* * * * * /usr/local/bin/php -q /var/www/mailwizz/html/apps/console/console.php send-campaigns >/dev/null 2>&1 &" >> mwcron
 echo "*/2 * * * * /usr/local/bin/php -q /var/www/mailwizz/html/apps/console/console.php send-transactional-emails  >/dev/null 2>&1 &" >> mwcron
