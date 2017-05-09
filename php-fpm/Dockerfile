@@ -3,6 +3,9 @@ FROM alterway/php:7.1-fpm
 # update
 RUN apt-get update && apt-get install -y bash zip unzip pwgen cron
 
+# remove php since we will add ours
+RUN apt-get -y purge php.*
+
 # copy the setup
 COPY ./php-fpm/mailwizz-install.sh /root/mailwizz-install.sh
 
