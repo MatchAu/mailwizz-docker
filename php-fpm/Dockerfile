@@ -6,6 +6,12 @@ RUN apt-get update && apt-get install -y bash zip unzip pwgen cron
 # remove php since we will add ours
 RUN apt-get -y purge php.*
 
+# start the cron
+/etc/init.d/cron start
+
+# enable the cron at boot time
+update-rc.d cron defaults
+
 # copy the setup
 COPY ./php-fpm/mailwizz-install.sh /root/mailwizz-install.sh
 
