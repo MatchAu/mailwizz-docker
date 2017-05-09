@@ -17,3 +17,6 @@ RUN apt-get autoremove -y \
     && apt-get clean all \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /usr/share/doc /usr/share/man /usr/share/locale
+
+# cronjobs
+RUN /etc/init.d/cron start && update-rc.d cron defaults
