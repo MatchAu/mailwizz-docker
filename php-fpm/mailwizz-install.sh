@@ -65,13 +65,13 @@ sed -i "s/{DB_PREFIX}//g" /var/www/mailwizz/html/apps/common/config/main-custom.
 sed -i "s/{EMAILS_CUSTOM_HEADER_PREFIX}/X-${EMAILS_CUSTOM_HEADER_PREFIX}/g" /var/www/mailwizz/html/apps/common/config/main-custom.php
 
 echo "Adding the cron jobs... "
-echo "* * * * * php -q /var/www/mailwizz/html/apps/console/console.php send-campaigns >/dev/null 2>&1 &" >> mwcron
-echo "*/2 * * * * php -q /var/www/mailwizz/html/apps/console/console.php send-transactional-emails  >/dev/null 2>&1 &" >> mwcron
-echo "*/10 * * * * php -q /var/www/mailwizz/html/apps/console/console.php bounce-handler >/dev/null 2>&1 &" >> mwcron
-echo "*/20 * * * * php -q /var/www/mailwizz/html/apps/console/console.php feedback-loop-handler >/dev/null 2>&1 &" >> mwcron
-echo "*/3 * * * * php -q /var/www/mailwizz/html/apps/console/console.php process-delivery-and-bounce-log >/dev/null 2>&1 &" >> mwcron
-echo "0 * * * * php -q /var/www/mailwizz/html/apps/console/console.php hourly >/dev/null 2>&1 &" >> mwcron
-echo "0 0 * * * php -q /var/www/mailwizz/html/apps/console/console.php daily >/dev/null 2>&1 &" >> mwcron
+echo "* * * * * /usr/local/bin/php -q /var/www/mailwizz/html/apps/console/console.php send-campaigns >/dev/null 2>&1 &" >> mwcron
+echo "*/2 * * * * /usr/local/bin/php -q /var/www/mailwizz/html/apps/console/console.php send-transactional-emails  >/dev/null 2>&1 &" >> mwcron
+echo "*/10 * * * * /usr/local/bin/php -q /var/www/mailwizz/html/apps/console/console.php bounce-handler >/dev/null 2>&1 &" >> mwcron
+echo "*/20 * * * * /usr/local/bin/php -q /var/www/mailwizz/html/apps/console/console.php feedback-loop-handler >/dev/null 2>&1 &" >> mwcron
+echo "*/3 * * * * /usr/local/bin/php -q /var/www/mailwizz/html/apps/console/console.php process-delivery-and-bounce-log >/dev/null 2>&1 &" >> mwcron
+echo "0 * * * * /usr/local/bin/php -q /var/www/mailwizz/html/apps/console/console.php hourly >/dev/null 2>&1 &" >> mwcron
+echo "0 0 * * * /usr/local/bin/php -q /var/www/mailwizz/html/apps/console/console.php daily >/dev/null 2>&1 &" >> mwcron
 crontab mwcron
 rm mwcron
 
