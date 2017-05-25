@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y bash zip unzip pwgen cron
 RUN apt-get -y purge php.*
 
 # install imap
+RUN apt-get update && apt-get install -y libc-client-dev libkrb5-dev && rm -r /var/lib/apt/lists/*
 RUN apt-get update \
     && docker-php-ext-configure imap --with-imap-ssl --with-kerberos \
     && docker-php-ext-install imap
